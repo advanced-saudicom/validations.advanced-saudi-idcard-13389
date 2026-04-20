@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Inspection ID Card - Full Layout</title>
+    <title>Advanced Inspection ID Card - Responsive</title>
     <style>
         :root {
             --primary-blue: #1a4a8e;
@@ -22,18 +22,44 @@
             align-items: center; 
         }
 
+        /* পিসি এবং বড় স্ক্রিনের জন্য ডিফল্ট স্টাইল */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
         .card {
             width: 530px; 
             height: 335px; 
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             position: relative;
             overflow: hidden;
             border: 1px solid #ccc;
             display: flex;
             flex-direction: column;
+            flex-shrink: 0; /* মোবাইল ভিউতে যাতে চ্যাপ্টা না হয় */
+        }
+
+        /* মোবাইল ভিউ রেসপন্সিভনেস */
+        @media (max-width: 550px) {
+            body { padding: 10px; }
+            .card {
+                /* মোবাইলে কার্ডটি স্ক্রিন অনুযায়ী ছোট করার জন্য স্কেলিং */
+                transform: scale(0.65); 
+                margin: -50px 0; /* স্কেলিংয়ের কারণে তৈরি হওয়া বাড়তি গ্যাপ কমানোর জন্য */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                transform: scale(0.55);
+                margin: -70px 0;
+            }
         }
 
         .h-line {
@@ -50,7 +76,7 @@
             align-items: center; 
             padding: 10px 15px; 
         }
-        .logo-left, .logo-right { width: 55px; height: 55px; }
+        .logo-left, .logo-right { width: 55px; height: 55px; object-fit: contain; }
         .title-box { text-align: center; flex: 1; }
         .title-box h1 { color: var(--primary-blue); font-size: 26px; font-weight: bold; margin: 0; }
         .title-box p { font-size: 13px; font-weight: bold; margin-top: 1px; color: #000; }
@@ -66,7 +92,7 @@
         }
 
         .footer-grid {
-            display: grid; grid-template-columns: 75px 1fr 140px;
+            display: grid; grid-template-columns: 80px 1fr 140px;
             padding: 5px 15px; align-items: center; position: absolute;
             bottom: 45px; width: 100%; background: #fff;
         }
@@ -82,7 +108,7 @@
             font-size: 24px; font-weight: bold; position: absolute; bottom: 0; width: 100%;
         }
 
-        /* --- Back Side Styles (Updated) --- */
+        /* --- Back Side Styles --- */
         .back-top { background: var(--dark-navy); color: #fff; padding: 10px; text-align: center; font-size: 16px; font-weight: bold; }
         .back-body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
         
@@ -91,7 +117,6 @@
             margin-top: 55px; margin-bottom: 5px;
         }
 
-        /* লোগো ও অ্যাড্রেস কন্টেইনার */
         .address-container {
             display: flex;
             align-items: center;
@@ -99,19 +124,12 @@
             padding: 0 10px;
         }
 
-        .side-logos {
-            display: flex;
-            gap: 5px;
-        }
-
-        .side-logos img {
-            width: 45px; /* লোগোর সাইজ ছোট রাখা হয়েছে যাতে সব জায়গা হয় */
-            height: auto;
-        }
+        .side-logos { display: flex; gap: 5px; }
+        .side-logos img { width: 40px; height: auto; }
 
         .mid-addr { flex: 1; text-align: center; }
         .mid-addr h2 { color: var(--primary-blue); font-size: 23px; margin-bottom: 2px; }
-        .mid-addr p { font-size: 15px; font-weight: bold; line-height: 1.3; }
+        .mid-addr p { font-size: 14px; font-weight: bold; line-height: 1.2; }
 
         .disc-section { padding: 0 15px 10px; }
         .disc-title { color: var(--alert-red); font-weight: bold; text-decoration: underline; font-size: 12px; }
@@ -120,79 +138,81 @@
 </head>
 <body>
 
-    <div class="card">
-        <div class="header">
-            <img src="advance.png" alt="Logo" class="logo-left">
-            <div class="title-box">
-                <h1>Advanced Inspection</h1>
-                <p>Dammam - Kingdom of Saudi Arabia</p>
-            </div>
-            <img src="leea.png" alt="Logo" class="logo-right">
-        </div>
-        <div class="h-line"></div> 
-
-        <div class="main-info">
-            <div class="details">
-                <p>Name: <span>Aminul Islam</span></p>
-                <p>Iqama / Passport / ID No.: <span>2552185411</span></p>
-                <p>Employee. No.: <span>-</span></p>
-                <p>Co. Name: <span>Mohammad Nasar Al dhakkan Est.</span></p>
-            </div>
-            <img src="photo.jpg" class="photo" alt="Photo">
-        </div>
-
-        <div class="footer-grid">
-            <div class="h-line" style="position: absolute; top: 0; left: 0;"></div>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://advanced-saudi.com/certificates/verify?id=RD2414617" class="qr">
-            <div class="date-box">
-                <span class="cert-no">Certificate No.: &nbsp; RD2414617</span><br><br>
-                <span class="date-label">Date of Issue:</span> <span class="date-label">Expiry Date:</span><br>
-                <span class="date-val">27/08/2024</span> <span class="date-val">26/08/2025</span>
-            </div>
-            <div class="examinar-box">
-                Examinar:<br>
-                <img src="signature.png" class="sig-img">
-                Engr. Fawad Ahmad
-            </div>
-        </div>
-        <div class="bottom-banner">Scaffold Erector & Dismantler</div>
-    </div>
-
-    <div class="card">
-        <div class="back-top">
-            The holder of this card has successfully completed the training<br>
-            session in Shovel Operator Methods.
-        </div>
-        <div class="back-body">
-            <p class="val-text">To Validate please visit https://advanced-saudicom.github.io/certificates/ or Scan QR Code</p>
-            <div class="h-line"></div>
-
-            <div class="address-container">
-                <div class="side-logos">
-                    <img src="eas.png" alt="EAS">
-                    <img src="gcf.png" alt="GCF">
+    <div class="card-container">
+        <div class="card">
+            <div class="header">
+                <img src="advance.png" alt="Logo" class="logo-left">
+                <div class="title-box">
+                    <h1>Advanced Inspection</h1>
+                    <p>Dammam - Kingdom of Saudi Arabia</p>
                 </div>
+                <img src="leea.png" alt="Logo" class="logo-right">
+            </div>
+            <div class="h-line"></div> 
 
-                <div class="mid-addr">
-                    <h2>Advanced Inspection</h2>
-                    <p>P.O.Box 9937, Dammam - 32241-KSA</p>
-                    <p>Tel.: 013 - 8327055 / 8326461, Fax: 8320838</p>
-                    <p>E-mail : info@advanced-saudi.com</p>
-                    <p>www.advanced-saudi.com</p>
+            <div class="main-info">
+                <div class="details">
+                    <p>Name: <span>Aminul Islam</span></p>
+                    <p>Iqama / Passport / ID No.: <span>2552185411</span></p>
+                    <p>Employee. No.: <span>-</span></p>
+                    <p>Co. Name: <span>Mohammad Nasar Al dhakkan Est.</span></p>
                 </div>
+                <img src="photo.jpg" class="photo" alt="Photo">
+            </div>
 
-                <div class="side-logos">
-                    <img src="lms.png" alt="LMS">
-                    <img src="ias.png" alt="IAS">
+            <div class="footer-grid">
+                <div class="h-line" style="position: absolute; top: 0; left: 0;"></div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://advanced-saudi.com/certificates/verify?id=RD2414617" class="qr">
+                <div class="date-box">
+                    <span class="cert-no">Certificate No.: &nbsp; RD2414617</span><br><br>
+                    <span class="date-label">Date of Issue:</span> <span class="date-label">Expiry Date:</span><br>
+                    <span class="date-val">27/08/2024</span> <span class="date-val">26/08/2025</span>
+                </div>
+                <div class="examinar-box">
+                    Examinar:<br>
+                    <img src="signature.png" class="sig-img">
+                    Engr. Fawad Ahmad
                 </div>
             </div>
+            <div class="bottom-banner">Scaffold Erector & Dismantler</div>
+        </div>
 
-            <div class="h-line"></div>
-            <div class="disc-section">
-                <span class="disc-title">Disclaimer</span>
-                <p class="disc-text">
-                    We hereby declare that the holder of this card was examined in accordance with applicable standards and that results were satisfactory at the time of examination. Advanced Company accepts no liability for any errors committed by the holder of this card while attending the categorized duty.
-                </p>
+        <div class="card">
+            <div class="back-top">
+                The holder of this card has successfully completed the training<br>
+                session in Shovel Operator Methods.
+            </div>
+            <div class="back-body">
+                <p class="val-text">To Validate please visit https://advanced-saudicom.github.io/certificates/ or Scan QR Code</p>
+                <div class="h-line"></div>
+
+                <div class="address-container">
+                    <div class="side-logos">
+                        <img src="eas.png" alt="EAS">
+                        <img src="gcf.png" alt="GCF">
+                    </div>
+
+                    <div class="mid-addr">
+                        <h2>Advanced Inspection</h2>
+                        <p>P.O.Box 9937, Dammam - 32241-KSA</p>
+                        <p>Tel.: 013 - 8327055 / 8326461</p>
+                        <p>E-mail : info@advanced-saudi.com</p>
+                        <p>www.advanced-saudi.com</p>
+                    </div>
+
+                    <div class="side-logos">
+                        <img src="lms.png" alt="LMS">
+                        <img src="ias.png" alt="IAS">
+                    </div>
+                </div>
+
+                <div class="h-line"></div>
+                <div class="disc-section">
+                    <span class="disc-title">Disclaimer</span>
+                    <p class="disc-text">
+                        We hereby declare that the holder of this card was examined in accordance with applicable standards and that results were satisfactory at the time of examination. Advanced Company accepts no liability for any errors committed by the holder of this card while attending the categorized duty.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
